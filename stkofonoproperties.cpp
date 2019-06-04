@@ -62,5 +62,5 @@ QString StkOfonoProperties::mainMenuTitle()
 QString StkOfonoProperties::mainMenuIconUrl()
 {
     return StkOfonoUtils::findIconUrl(
-                (uchar)mProperties.value("MainMenuIcon").toChar().toAscii());
+                (uchar)mProperties.value("MainMenuIcon").toChar().toLatin1());
 }

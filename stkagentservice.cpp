@@ -14,7 +14,7 @@
 
 /* Qt includes */
 #include <QtDebug>
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include <QIcon>
 
 /* oFono SIM Toolkit utilities*/

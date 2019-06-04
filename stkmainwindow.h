@@ -14,7 +14,7 @@
 #define STKMAINWINDOW_H
 
 #include <QMainWindow>
-#include <QtDeclarative/QDeclarativeView>
+#include <QQuickView>
 #include "stkif.h"
 #include "simif.h"
 #include "stkagentservice.h"
@@ -35,7 +35,7 @@ private:
     SimIf *mSimIf;
     StkAgentService *mStkAgentService;
     StkOfonoProperties *mStkProperties;
-    QDeclarativeView *mView;
+    QQuickView *mView;
 
     void createMainView();
 

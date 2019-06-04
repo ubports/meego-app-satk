@@ -4,8 +4,7 @@ include(common.pri)
 
 # ---- Configuration
 
-QT += core gui declarative
-CONFIG += qdbus
+QT += core gui quick dbus widgets
 
 TARGET = satk
 TEMPLATE = app
@@ -16,19 +15,19 @@ INSTALLS=target
 # ---- Generated DBus Interfaces
 
 !exists(modemif.h) {
-    system(qdbusxml2cpp -v -c ModemIf -p modemif.h:modemif.cpp -i ofonodbustypes.h interfaces/org.ofono.Modem.xml)
+    system(qdbusxml2cpp -V -c ModemIf -p modemif.h:modemif.cpp -i ofonodbustypes.h interfaces/org.ofono.Modem.xml)
 }
 !exists(mgrif.h) {
-    system(qdbusxml2cpp -v -c MgrIf -p mgrif.h:mgrif.cpp -i ofonodbustypes.h interfaces/org.ofono.Manager.xml)
+    system(qdbusxml2cpp -V -c MgrIf -p mgrif.h:mgrif.cpp -i ofonodbustypes.h interfaces/org.ofono.Manager.xml)
 }
 !exists(simif.h) {
-    system(qdbusxml2cpp -v -c SimIf -p simif.h:simif.cpp interfaces/org.ofono.SimManager.xml)
+    system(qdbusxml2cpp -V -c SimIf -p simif.h:simif.cpp interfaces/org.ofono.SimManager.xml)
 }
 !exists(stkif.h) {
-    system(qdbusxml2cpp -v -c StkIf -p stkif.h:stkif.cpp interfaces/org.ofono.SimToolkit.xml)
+    system(qdbusxml2cpp -V -c StkIf -p stkif.h:stkif.cpp interfaces/org.ofono.SimToolkit.xml)
 }
 !exists(stkagentifadaptor.h) {
-    system(qdbusxml2cpp -v -c StkAgentIfAdaptor -a stkagentifadaptor.h:stkagentifadaptor.cpp -i ofonodbustypes.h interfaces/org.ofono.SimToolkitAgent.xml)
+    system(qdbusxml2cpp -V -c StkAgentIfAdaptor -a stkagentifadaptor.h:stkagentifadaptor.cpp -i ofonodbustypes.h interfaces/org.ofono.SimToolkitAgent.xml)
 }
 
 

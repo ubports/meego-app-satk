@@ -9,7 +9,9 @@
  * Written by - Luc Yriarte <luc.yriarte@linux.intel.com>
  */
 
-#include <QtDeclarative>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickItem>
 #include "stkmainwindow.h"
 #include "stkmenumodel.h"
 #include "stkdefines.h"
@@ -59,7 +61,7 @@ void StkMainWindow::stkPropertyChanged(const QString &property, const QDBusVaria
     Q_UNUSED(value);
     // save properties and view for deletion
     StkOfonoProperties *delStkProperties = mStkProperties;
-    QDeclarativeView *delView = mView ;
+    QQuickView *delView = mView ;
     // reload properties, recreate main view
     createMainView();
     // disconnect old view signals
@@ -75,16 +77,17 @@ void StkMainWindow::createMainView() {
     // Store SimToolkit interface properties
     mStkProperties = new StkOfonoProperties(mStkIf,mSimIf);
     // Create a qml view
-    mView = new QDeclarativeView;
+    mView = new QQuickView;
     // Register image provider, deleted with the engine
-    QDeclarativeEngine * engine = mView->engine();
+    QQmlEngine * engine = mView->engine();
     engine->addImageProvider(SIM_IMAGE_PROVIDER, new SimImageProvider(mSimIf));
 
     // Load a qml main menu
     mView->setSource(QUrl("qrc:/StkMenu.qml"));
     // Set it as central widget
-    mView->setResizeMode(QDeclarativeView::SizeRootObjectToView);
-    setCentralWidget(mView);
+    mView->setResizeMode(QQuickView::SizeRootObjectToView);
+    QWidget *container = QWidget::createWindowContainer(mView);
+    setCentralWidget(container);
     QObject *root = mView->rootObject();
 
     // Main icon and title
@@ -99,7 +102,7 @@ void StkMainWindow::createMainView() {
     }
 
     // SIM Toolkit Menu
-    QDeclarativeContext *context = mView->rootContext();
+    QQmlContext *context = mView->rootContext();
     StkMenuModel * menuModel = new StkMenuModel();
     menuModel->setMenuItems(mStkProperties->mainMenuItems());
     context->setContextProperty("menuModel",menuModel);

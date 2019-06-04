@@ -11,7 +11,9 @@
 
 
 #include <QVBoxLayout>
-#include <QtDeclarative>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickItem>
 #include "stkdialog.h"
 #include "stkmenumodel.h"
 
@@ -33,15 +35,16 @@ StkDialog::StkDialog(SimImageProvider * imageProvider, const QString &iconUrl,
 void StkDialog::initView()
 {
     // Create QML View as central widget
-    mView = new QDeclarativeView;
+    mView = new QQuickView;
 
     // Register image provider, deleted with the engine
-    QDeclarativeEngine * engine = mView->engine();
+    QQmlEngine * engine = mView->engine();
     engine->addImageProvider(SIM_IMAGE_PROVIDER, mImageProvider);
     mView->setSource(QUrl(mQmlViewUrl));
-    mView->setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    mView->setResizeMode(QQuickView::SizeRootObjectToView);
+    QWidget *container = QWidget::createWindowContainer(mView);
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(mView);
+    layout->addWidget(container);
     setLayout(layout);
 
     // Find qml objects and connect signals
@@ -60,7 +63,7 @@ void StkDialog::initView()
     QObject * menuView = root->findChild<QObject*>("menuView");
     if (menuView) {
         // set model "menuModel" for ListView "menuView"
-        QDeclarativeContext *context = mView->rootContext();
+        QQmlContext *context = mView->rootContext();
         StkMenuModel * menuModel = new StkMenuModel();
         menuModel->setMenuItems(mMenuItems);
         context->setContextProperty("menuModel",menuModel);

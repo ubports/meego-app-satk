@@ -10,7 +10,7 @@
  */
 
 /* Qt includes */
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include <QtDebug>
 
 /* oFono DBus types */

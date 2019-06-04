@@ -15,10 +15,10 @@
 StkMenuModel::StkMenuModel(QObject *parent) :
     QAbstractListModel(parent)
 {
-    QHash<int, QByteArray> roles;
-    roles[TitleRole] = "title";
-    roles[IconRole] = "icon";
-    setRoleNames(roles);
+ //   QHash<int, QByteArray> roles;
+ //   roles[TitleRole] = "title";
+ //   roles[IconRole] = "icon";
+ //   setRoleNames(roles);
 }
 
 

@@ -14,7 +14,7 @@
 #include "stkofonoutils.h"
 
 SimImageProvider::SimImageProvider(SimIf *simIf) :
-    QDeclarativeImageProvider (QDeclarativeImageProvider::Pixmap)
+    QQuickImageProvider (QQuickImageProvider::Pixmap)
 {
     mSimIf = simIf;
 }

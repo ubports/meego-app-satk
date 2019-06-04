@@ -13,11 +13,11 @@
 #ifndef SIMIMAGEPROVIDER_H
 #define SIMIMAGEPROVIDER_H
 
-#include <QDeclarativeImageProvider>
+#include <QQuickImageProvider>
 #include "simif.h"
 
 
-class SimImageProvider : public QDeclarativeImageProvider
+class SimImageProvider : public QQuickImageProvider
 {
 public:
     SimImageProvider(SimIf *simIf);

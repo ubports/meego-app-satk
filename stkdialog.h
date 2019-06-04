@@ -43,10 +43,10 @@
 
 #include <QtDebug>
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 #include <QtCore/QString>
 #include <QtCore/QVariant>
-#include <QtDeclarative/QDeclarativeView>
+#include <QQuickView>
 #include <QList>
 
 #include "stkdefines.h"
@@ -149,7 +149,7 @@ private:
     // for "browserView" items
     QString mUrl;
     // QML view support
-    QDeclarativeView *mView;
+    QQuickView *mView;
     // constructor parameters
     SimImageProvider * mImageProvider;
     QString mIconUrl;
